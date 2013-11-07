@@ -13,22 +13,24 @@ public class Brains_on_the_Field : PhysicsGame
         Surface alaReuna = Surface.CreateBottom(Level);
         Add(alaReuna);
 
-        alaReuna.Color = Color.Black;
+        alaReuna.Color = Color.Gray;
 
        Surface vasenReuna = Surface.CreateLeft(Level);
        Add(vasenReuna);
 
-        vasenReuna.Color = Color.Black;
+        vasenReuna.Color = Color.Gray;
 
        Surface oikeaReuna = Surface.CreateRight(Level);
        Add(oikeaReuna);
 
-        oikeaReuna.Color = Color.Black;
+        oikeaReuna.Color = Color.Gray;
 
        Surface ylaReuna = Surface.CreateTop(Level);
        Add(ylaReuna);
 
-       ylaReuna.Color = Color.Black;
+       ylaReuna.Color = Color.Gray;
+
+       Level.Background.CreateStars();
 
         // TODO: Kirjoita ohjelmakoodisi tähän
 
