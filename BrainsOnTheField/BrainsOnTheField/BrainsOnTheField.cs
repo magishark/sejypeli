@@ -9,6 +9,8 @@ using Jypeli.Widgets;
 public class BrainsOnTheField : PhysicsGame
 {
     PlatformCharacter pelaaja;
+    PlatformCharacter Zombie1;
+
     void LiikutaPelaajaaVasemmalle()
     {
         pelaaja.Walk(-300);
@@ -30,6 +32,21 @@ public class BrainsOnTheField : PhysicsGame
         Add(pelaaja);
         Image ukko = LoadImage("Ninja1");
         pelaaja.Image = ukko;
+    }
+    void LuoZombie1()
+    {
+        Zombie1 = new PlatformCharacter(50, 100);
+        Add(Zombie1);
+        Image ukko = LoadImage("Zombie1");
+        Zombie1.Image = ukko;
+        Zombie1.X = 100;
+        FollowerBrain aivot = new FollowerBrain(pelaaja);
+        aivot.Active = true;
+        aivot.Speed = 300;
+        aivot.DistanceFar = 600;
+        aivot.DistanceClose = 1;
+        aivot.StopWhenTargetClose = true;
+        Zombie1.Brain = aivot;
     }
     public override void Begin()
     {
@@ -57,6 +74,12 @@ public class BrainsOnTheField : PhysicsGame
 
        luoukko();
        Gravity = new Vector(0, -1000);
+       LuoZombie1();
+       Timer ajastin = new Timer();
+       ajastin.Interval = 5.0;
+       ajastin.Timeout += LuoZombie1;
+       ajastin.Start();
+        
 
        Keyboard.Listen(Key.Left, ButtonState.Down,
  LiikutaPelaajaaVasemmalle, "Pelaaja liikkuu vasemmalle");
