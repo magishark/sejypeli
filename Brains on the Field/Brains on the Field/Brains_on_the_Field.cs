@@ -8,6 +8,13 @@ using Jypeli.Widgets;
 
 public class Brains_on_the_Field : PhysicsGame
 {
+    void luoukko()
+    {
+        PlatformCharacter pelaaja = new PlatformCharacter(50, 100);
+        Add(pelaaja);
+        Image ukko = LoadImage("Ninja1");
+        pelaaja.Image = ukko;
+    }
     public override void Begin()
     {
         Surface alaReuna = Surface.CreateBottom(Level);
@@ -31,6 +38,9 @@ public class Brains_on_the_Field : PhysicsGame
        ylaReuna.Color = Color.Gray;
 
        Level.Background.CreateStars();
+
+       luoukko();
+       Gravity = new Vector(0, -1000);
 
         // TODO: Kirjoita ohjelmakoodisi tähän
 
