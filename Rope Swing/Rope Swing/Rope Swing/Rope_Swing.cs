@@ -130,7 +130,18 @@ public class Rope_Swing : PhysicsGame
         if (kohde == ala)
         {
             pisteLaskuri.Value += 1;
-            
+        }
+        else if(kohde== vasen)
+        {
+         pisteLaskuri.Value += 5;
+        }
+        else if(kohde==oikea)
+        {
+         pisteLaskuri.Value += 5;
+        }
+        else if (kohde == yla)
+        {
+            pisteLaskuri.Value += 10;
         }
     }
 }
