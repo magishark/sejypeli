@@ -8,21 +8,38 @@ using Jypeli.Widgets;
 
 public class Rope_Swing : PhysicsGame
 {
+    PhysicsObject paa;
+    PhysicsObject Keho;
+    PhysicsObject kasi1;
+    PhysicsObject kasi2;
     public override void Begin()
     {
-        PhysicsObject paa = new PhysicsObject(20, 20);
+        Image taustaKuva = LoadImage("Kentta1");
+        Level.Background.Image = taustaKuva;
+        Level.Background.FitToLevel();
+        Camera.ZoomToLevel();
+        Level.CreateBottomBorder();
+        Level.CreateRightBorder();
+        Level.CreateLeftBorder();
+        Level.CreateTopBorder();
+
+        paa = new PhysicsObject(20, 20);
+        paa.Image = LoadImage("poop1");
         Add(paa);
 
-        PhysicsObject Keho = new PhysicsObject(20, 40);
+        Keho = new PhysicsObject(20, 40);
+        Keho.Image = LoadImage("poop2");
         Add(Keho);
 
         Keho.X = 0;
         Keho.Y = -40;
 
-        PhysicsObject kasi1 = new PhysicsObject(10, 40);
+         kasi1 = new PhysicsObject(10, 40);
+        kasi1.Image = LoadImage("poop3");
         Add(kasi1);
 
-        PhysicsObject kasi2 = new PhysicsObject(10, 40);
+         kasi2 = new PhysicsObject(10, 40);
+        kasi2.Image = LoadImage("poop3");
         Add(kasi2);
 
         kasi1.X = 20;
@@ -32,6 +49,7 @@ public class Rope_Swing : PhysicsGame
         kasi2.Angle = Angle.FromDegrees(-30);
         kasi2.Y = -40;
 
+        /*
         PhysicsObject Leggy1 = new PhysicsObject(10, 40);
         Add(Leggy1);
 
@@ -41,13 +59,13 @@ public class Rope_Swing : PhysicsGame
         Leggy1.X = 10;
         Leggy1.Y = -90;
         Leggy2.X = -10;
-        Leggy2.Y = -90;
+        Leggy2.Y = -90;*/
 
         lisaaliitos(paa, Keho, new Vector(0, 0));
         lisaaliitos(kasi1, Keho, new Vector(10, -10));
         lisaaliitos(kasi2, Keho, new Vector(-10, -10));
-        lisaaliitos(Leggy1, Keho, new Vector(10, -60));
-        lisaaliitos(Leggy2, Keho, new Vector(10, -60));
+        //lisaaliitos(Leggy1, Keho, new Vector(10, -60));
+        //lisaaliitos(Leggy2, Keho, new Vector(10, -60));
 
         Gravity = new Vector(0, -500);
 
@@ -56,6 +74,8 @@ public class Rope_Swing : PhysicsGame
 
         PhoneBackButton.Listen(ConfirmExit, "Lopeta peli");
         Keyboard.Listen(Key.Escape, ButtonState.Pressed, ConfirmExit, "Lopeta peli");
+        Mouse.Listen(MouseButton.Left, ButtonState.Pressed, PoopyBlow, "lenna");
+        Mouse.IsCursorVisible = true;
     }
     void lisaaliitos(PhysicsObject olio1, PhysicsObject olio2, Vector akselinpaikka)
     {
@@ -65,5 +85,21 @@ public class Rope_Swing : PhysicsGame
         Add(liitos);
 
         olio1.Mass = 0.5;
+    }
+    void PoopyBlow()
+    {
+        Explosion rajahdys = new Explosion(50);
+        rajahdys.Position = Mouse.PositionOnScreen;
+        Add(rajahdys);
+    }
+    void LuoKentta()
+    {
+        //ColorTileMap ruudut = ColorTileMap.FromLevelAsset("Kentta1");
+        //ruudut.SetTileMethod(Color.Green, LuoPelaaja);
+       // ruudut.Execute(20, 20);
+    }
+    void LuoPelaaja()
+    {
+
     }
 }
