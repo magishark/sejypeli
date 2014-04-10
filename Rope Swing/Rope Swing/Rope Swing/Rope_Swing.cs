@@ -12,16 +12,21 @@ public class Rope_Swing : PhysicsGame
     PhysicsObject Keho;
     PhysicsObject kasi1;
     PhysicsObject kasi2;
+    IntMeter pisteLaskuri;
+    PhysicsObject vasen;
+    PhysicsObject oikea;
+    PhysicsObject yla;
+    PhysicsObject ala;
     public override void Begin()
     {
         Image taustaKuva = LoadImage("Kentta1");
         Level.Background.Image = taustaKuva;
         Level.Background.FitToLevel();
         Camera.ZoomToLevel();
-        Level.CreateBottomBorder();
-        Level.CreateRightBorder();
-        Level.CreateLeftBorder();
-        Level.CreateTopBorder();
+       ala = Level.CreateBottomBorder();
+       oikea =  Level.CreateRightBorder();
+       vasen =  Level.CreateLeftBorder();
+       yla = Level.CreateTopBorder();
 
         paa = new PhysicsObject(20, 20);
         paa.Image = LoadImage("poop1");
@@ -49,6 +54,8 @@ public class Rope_Swing : PhysicsGame
         kasi2.Angle = Angle.FromDegrees(-30);
         kasi2.Y = -40;
 
+        AddCollisionHandler(paa, Osui);
+
         /*
         PhysicsObject Leggy1 = new PhysicsObject(10, 40);
         Add(Leggy1);
@@ -66,6 +73,8 @@ public class Rope_Swing : PhysicsGame
         lisaaliitos(kasi2, Keho, new Vector(-10, -10));
         //lisaaliitos(Leggy1, Keho, new Vector(10, -60));
         //lisaaliitos(Leggy2, Keho, new Vector(10, -60));
+
+        LuoPistelaskuri();
 
         Gravity = new Vector(0, -500);
 
@@ -101,5 +110,27 @@ public class Rope_Swing : PhysicsGame
     void LuoPelaaja()
     {
 
+    }
+
+    void LuoPistelaskuri()
+    {
+        pisteLaskuri = new IntMeter(0);
+
+        Label pisteNaytto = new Label();
+        pisteNaytto.X = Screen.Left + 100;
+        pisteNaytto.Y = Screen.Top - 100;
+        pisteNaytto.TextColor = Color.Black;
+        pisteNaytto.Color = Color.White;
+
+        pisteNaytto.BindTo(pisteLaskuri);
+        Add(pisteNaytto);
+    }
+    void Osui(PhysicsObject tormaaja, PhysicsObject kohde)
+    {
+        if (kohde == ala)
+        {
+            pisteLaskuri.Value += 1;
+            
+        }
     }
 }
